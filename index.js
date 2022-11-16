@@ -1,4 +1,4 @@
-const http = require('http')
+/* const http = require('http')
 const fs = require('fs')
 
 http.createServer(function (req, res) {
@@ -31,4 +31,31 @@ http.createServer(function (req, res) {
       return res.end()
     })
   }
-}).listen(8080)
+}).listen(8080) */
+
+const express = require('express')
+const path = require('path')
+const app = express()
+const pathname = path.join(__dirname, 'public')
+const PORT = process.env.PORT || 8080
+app.use(express.static('public'))
+
+app.get('/', (req, res) => {
+  res.sendFile(pathname + '/index.html')
+})
+
+app.get('/about', (req, res) => {
+  res.sendFile(pathname + '/about.html')
+})
+
+app.get('/contactMe', (req, res) => {
+  res.sendFile(pathname + '/contactMe.html')
+})
+
+app.use('/404', (req, res) => {
+  res.sendFile(pathname + '/404.html')
+})
+
+app.listen(PORT, function () {
+  console.log(`Example app listening on port ${PORT}!`)
+})
