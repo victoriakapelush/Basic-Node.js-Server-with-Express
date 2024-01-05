@@ -1,0 +1,19 @@
+{
+  "name": "simple-node-website",
+  "version": "1.0.0",
+  "description": "basic node website with links",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victoriakapelush/Simple-Node-Website.git"
+  },
+  "author": "Victoria Kapelush",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/victoriakapelush/Simple-Node-Website/issues"
+  },
+  "homepage": "https://github.com/victoriakapelush/Simple-Node-Website#readme"
+}

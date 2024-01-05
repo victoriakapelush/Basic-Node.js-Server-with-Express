@@ -1,61 +1,34 @@
-/* const http = require('http')
-const fs = require('fs')
+const express = require('express');
+const path = require('path');
+const app = express();
 
-http.createServer(function (req, res) {
-  if (req.url === '/') {
-    fs.readFile('index.html', function (err, data) {
-      if (err) throw err
-      res.writeHead(200, { 'Content-Type': 'text/html' })
-      res.write(data)
-      return res.end()
-    })
-  } else if (req.url === '/about') {
-    fs.readFile('about.html', function (err, data) {
-      if (err) throw err
-      res.writeHead(200, { 'Content-Type': 'text/html' })
-      res.write(data)
-      return res.end()
-    })
-  } else if (req.url === '/contactMe') {
-    fs.readFile('contactMe.html', function (err, data) {
-      if (err) throw err
-      res.writeHead(200, { 'Content-Type': 'text/html' })
-      res.write(data)
-      return res.end()
-    })
-  } else {
-    fs.readFile('404.html', function (err, data) {
-      if (err) throw err
-      res.writeHead(200, { 'Content-Type': 'text/html' })
-      res.write(data)
-      return res.end()
-    })
-  }
-}).listen(8080) */
+const port = 8080;
+const pathname = path.join(__dirname, 'public');
 
-const express = require('express')
-const path = require('path')
-const app = express()
-const pathname = path.join(__dirname, 'public')
-const PORT = process.env.PORT || 8080
-app.use(express.static('public'))
+// Set up middleware to serve static files from the 'public' directory
+app.use(express.static(pathname));
 
+// Define a route for the root URL '/'
 app.get('/', (req, res) => {
-  res.sendFile(pathname + '/index.html')
-})
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
+// Define a route for the 'about' URL '/'
 app.get('/about', (req, res) => {
-  res.sendFile(pathname + '/about.html')
-})
+  res.sendFile(path.join(__dirname, 'public', 'about.html'));
+});
 
+// Define a route for the 'contact me' URL '/'
 app.get('/contactMe', (req, res) => {
-  res.sendFile(pathname + '/contactMe.html')
-})
+  res.sendFile(path.join(__dirname, 'public', 'contactMe.html'));
+});
 
-app.use('/404', (req, res) => {
-  res.sendFile(pathname + '/404.html')
-})
+// Define a route for the 'error' URL '/'
+app.get('/404', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', '404.html'));
+});
 
-app.listen(PORT, function () {
-  console.log(`Example app listening on port ${PORT}!`)
-})
+// Start the Express server
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}/`);
+});
